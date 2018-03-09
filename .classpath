@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/redisson-all-3.6.2.jar" sourcepath="C:/Users/ADMINI~1/AppData/Local/Temp/.org.sf.feeling.decompiler1520480837188/source/redisson-all-3.6.2-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
