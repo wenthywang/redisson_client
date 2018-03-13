@@ -3,8 +3,13 @@
  */
 package test;
 
-import org.redisson.api.RBucket;
+import java.util.Map.Entry;
+
+import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
+
+import constants.AppConfig;
+import utils.RedisUtils;
 
 /**
  * <pre>
@@ -20,36 +25,20 @@ import org.redisson.api.RedissonClient;
  */
 public class RedisUtilsTest {
 	
-	
-	 public static String ip = "redis://111.230.24.31";  
-	 public static   String port = "6379";  
-	 public static    String password="test";
-  
-	 
 	 
     public static void main(String[] args) {
     	testGetRBucket();
 	}  
     
-    /** 
-     * RBucket 映射为 redis server 的 string 类型 
-     * 只能存放最后存储的一个字符串 
-     * redis server 命令: 
-     * 查看所有键---->keys * 
-     * 查看key的类型--->type testBucket 
-     * 查看key的值 ---->get testBucket 
-     */  
-    public static  void testGetRBucket() {  
-    	RedissonClient	 client = RedisUtils.getInstance().getRedisson(ip, port,password);  
-        RBucket<String> rBucket=RedisUtils.getInstance().getRBucket(client, "testBucket");  
-        //同步放置  
-        rBucket.set("redisBucketASync");  
-        //异步放置  
-        rBucket.setAsync("测试");  
-        String bucketString=rBucket.get();  
-        System.out.println(bucketString);  
-        RedisUtils.getInstance().closeRedisson(client);  
-    }  
+	public static void testGetRBucket() {
+		RedissonClient client = RedisUtils.getInstance().getRedisson(AppConfig.IP, AppConfig.PORT, AppConfig.PASSWORD,
+				AppConfig.REDIS_DATABASE);
+		RMap<String, Integer> rMap = RedisUtils.getInstance().getRMap(client, "IpProxy");
+		for (Entry<String, Integer> entry : rMap.entrySet()) {
+			System.out.println(entry.getKey() + "->" + entry.getValue());
+		}
+		RedisUtils.getInstance().closeRedisson(client);
+	}
   
 //    /** 
 //     * RMap  映射为  redis server 的 hash 类型 

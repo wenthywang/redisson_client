@@ -1,7 +1,7 @@
 /**
  * Copyright(c) Guangzhou JiaxinCloud Science & Technology Ltd. 
  */
-package test;
+package utils;
 
 import org.redisson.Redisson;
 import org.redisson.api.RAtomicLong;
@@ -69,9 +69,9 @@ public class RedisUtils {
 	     * @param port 
 	     * @return 
 	     */  
-	    public RedissonClient getRedisson(String ip,String port,String password){  
+	    public RedissonClient getRedisson(String ip,String port,String password,int database){  
 	        Config config=new Config();  
-	        config.useSingleServer().setAddress(ip+":"+port);  
+	        config.useSingleServer().setAddress(ip+":"+port).setDatabase(database);
 	        if(!StringUtil.isNullOrEmpty(password)){
 	        	config.useSingleServer().setPassword(password);
 	        }

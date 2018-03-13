@@ -7,6 +7,9 @@ import org.redisson.api.RCountDownLatch;
 import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 
+import constants.AppConfig;
+import utils.RedisUtils;
+
 /**
  * <pre>
  * redisson client demo。
@@ -20,13 +23,6 @@ import org.redisson.api.RedissonClient;
  * </pre>
  */
 public class TopicPub {
-	
-	
-	 public static String ip = "redis://111.230.24.31";  
-	 public static   String port = "6379";  
-	 public static    String password="test";
-  
-	 
 	 
     public static void main(String[] args) {
     	testPub();
@@ -36,7 +32,7 @@ public class TopicPub {
    * 消息发布者
    */
     public static  void testPub() {  
-    	RedissonClient	 client = RedisUtils.getInstance().getRedisson(ip, port,password);  
+    	RedissonClient	 client = RedisUtils.getInstance().getRedisson(AppConfig.IP, AppConfig.PORT,AppConfig.PASSWORD,AppConfig.REDIS_DATABASE);  
     	RTopic<String> rTopic=RedisUtils.getInstance().getRTopic(client, "testTopic");  
       System.out.println(rTopic.publish("今天是儿童节，大家儿童节快乐3,wocao"));  
       //发送完消息后 让订阅者不再等待  

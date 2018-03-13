@@ -8,6 +8,9 @@ import org.redisson.api.RTopic;
 import org.redisson.api.RedissonClient;
 import org.redisson.api.listener.MessageListener;
 
+import constants.AppConfig;
+import utils.RedisUtils;
+
 /**
  * <pre>
  * redisson client demo。
@@ -21,13 +24,6 @@ import org.redisson.api.listener.MessageListener;
  * </pre>
  */
 public class TopicSub {
-	
-	
-	 public static String ip = "redis://111.230.24.31";  
-	 public static   String port = "6379";  
-	 public static    String password="test";
-  
-	 
 	 
     public static void main(String[] args) {
     	testSub();
@@ -37,7 +33,7 @@ public class TopicSub {
      * 订阅者
      */
     public static  void testSub() {  
-    	RedissonClient	 client = RedisUtils.getInstance().getRedisson(ip, port,password);  
+    	RedissonClient	 client = RedisUtils.getInstance().getRedisson(AppConfig.IP, AppConfig.PORT,AppConfig.PASSWORD,AppConfig.REDIS_DATABASE);  
       RTopic<String> rTopic=RedisUtils.getInstance().getRTopic(client, "testTopic");  
       rTopic.addListener(new MessageListener<String>() {  
 
