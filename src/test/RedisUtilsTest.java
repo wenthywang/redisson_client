@@ -34,6 +34,8 @@ public class RedisUtilsTest {
 		RedissonClient client = RedisUtils.getInstance().getRedisson(AppConfig.IP, AppConfig.PORT, AppConfig.PASSWORD,
 				AppConfig.REDIS_DATABASE);
 		RMap<String, Integer> rMap = RedisUtils.getInstance().getRMap(client, "IpProxy");
+//		rMap.clear();
+//		rMap.put("test", 123);
 		for (Entry<String, Integer> entry : rMap.entrySet()) {
 			System.out.println(entry.getKey() + "->" + entry.getValue());
 		}
